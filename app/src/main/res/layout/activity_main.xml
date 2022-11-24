@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2CF3D6"
+    android:backgroundTint="#D7EAF4"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/order"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/mainPageOrders" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stored_order"
+        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="@+id/textView5"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/mainPageStoreOrder"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/new_york"
+        app:layout_constraintEnd_toEndOf="@+id/mainPageNY"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="@+id/mainPageNY"
+        app:layout_constraintTop_toBottomOf="@+id/mainPageNY" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/pizza_picker"
+        android:textColor="#131211"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/mainPageChicago"
+        android:layout_width="129dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="156dp"
+        android:contentDescription="@string/chicago_pizza"
+        android:cropToPadding="false"
+        android:onClick="goToChicago"
+        android:outlineAmbientShadowColor="#020000"
+        android:outlineProvider="background"
+        android:outlineSpotShadowColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/chicagomainpage" />
+
+    <ImageButton
+        android:id="@+id/mainPageNY"
+        android:layout_width="129dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="108dp"
+        android:contentDescription="@string/new_york_main_page"
+        app:layout_constraintBottom_toBottomOf="@+id/mainPageChicago"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.669"
+        app:layout_constraintStart_toEndOf="@+id/mainPageChicago"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/newyorkmain" />
+
+    <ImageButton
+        android:id="@+id/mainPageOrders"
+        android:layout_width="129dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="176dp"
+        android:contentDescription="@string/order_main_page"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/mainPageChicago"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mainPageChicago"
+        app:layout_constraintVertical_bias="0.29"
+        app:srcCompat="@drawable/ordermainpage" />
+
+    <ImageButton
+        android:id="@+id/mainPageStoreOrder"
+        android:layout_width="129dp"
+        android:layout_height="120dp"
+        android:contentDescription="@string/store_order_main_page"
+        app:layout_constraintBottom_toBottomOf="@+id/mainPageOrders"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.669"
+        app:layout_constraintStart_toEndOf="@+id/mainPageOrders"
+        app:layout_constraintTop_toBottomOf="@+id/mainPageNY"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/storedordermain" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/chicago"
+        app:layout_constraintEnd_toEndOf="@+id/mainPageChicago"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="@+id/mainPageChicago"
+        app:layout_constraintTop_toBottomOf="@+id/mainPageChicago" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

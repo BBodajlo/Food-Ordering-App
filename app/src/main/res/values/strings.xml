@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">PizzaApp</string>
+    <string name="pizza_picker">Pizza Picker</string>
+    <string name="chicago_pizza">Chicago Pizza</string>
+    <string name="new_york_main_page">New York Main Page</string>
+    <string name="textview">TextView</string>
+    <string name="order_main_page">Order Main Page</string>
+    <string name="store_order_main_page">Store Order Main Page</string>
+    <string name="new_york">New York</string>
+    <string name="chicago">Chicago</string>
+    <string name="order">Order</string>
+    <string name="stored_order">Stored Order</string>
+</resources>
