@@ -16,4 +16,5 @@
     <string name="small">Small</string>
     <string name="medium">Medium</string>
     <string name="large">Large</string>
+    <string name="add_to_order">Add To Order</string>
 </resources>

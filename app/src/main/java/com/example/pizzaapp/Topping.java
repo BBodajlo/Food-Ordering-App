@@ -1,5 +1,7 @@
 package com.example.pizzaapp;
 
+import android.widget.Adapter;
+
 /**
  * Enum to hold all the possible pizza toppings
  */

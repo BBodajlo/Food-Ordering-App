@@ -1,9 +1,16 @@
 package com.example.pizzaapp;
 
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -11,8 +18,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.EventListener;
 
 public class ChicagoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener{
@@ -27,6 +37,11 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
     private RadioButton mediumSize;
     private RadioButton largeSize;
     private TextView priceText;
+    private ListView toppingsList;
+    private ArrayAdapter<Topping> toppingsArray;
+    private Button addPizzaButton;
+    private Order testOrder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +63,27 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
         smallSize.setChecked(true);
         priceText = findViewById(R.id.priceText);
         sizeGroup.setOnCheckedChangeListener(this);
+        toppingsArray = new ArrayAdapter<Topping>(this, android.R.layout.simple_list_item_multiple_choice, Topping.values());
+        toppingsList = findViewById(R.id.toppingsList);
+        toppingsList.setAdapter(toppingsArray);
+        toppingsList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        toppingsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                updateToppings();
+                updatePrice();
+            }
+        });
+
+        addPizzaButton = findViewById(R.id.addPizzaButton);
+        addPizzaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addPizzaToOrder();
+            }
+        });
+        testOrder = new Order(1);
+
 
 
     }
@@ -64,18 +100,21 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
             case 1:
                 currentPizza = chicagoPizza.createBBQChicken();
                 chicagoCrustText.setText(currentPizza.getCrust().toString());
+
                 break;
 
             case 0:
 
                 currentPizza = chicagoPizza.createDeluxe();
                 chicagoCrustText.setText(currentPizza.getCrust().toString());
+
                 break;
 
             case 2:
 
                 currentPizza = chicagoPizza.createMeatzza();
                 chicagoCrustText.setText(currentPizza.getCrust().toString());
+
                 break;
 
             case 3:
@@ -84,9 +123,36 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
                 chicagoCrustText.setText(currentPizza.getCrust().toString());
                 break;
         }
+
+        handleToppingsList();
         updateSizePrice();
 
+        if(!(currentPizza instanceof BuildYourOwn))
+        {
+            toppingsList.setEnabled(false);
+        }
+        else{
+            toppingsList.setEnabled(true);
+        }
 
+
+
+    }
+
+    public void updateToppings()
+    {
+        if(currentPizza instanceof BuildYourOwn)
+        {
+            SparseBooleanArray itemsChecked = toppingsList.getCheckedItemPositions();
+
+            for(int i = 0; i < toppingsArray.getCount(); i++)
+            {
+                if(itemsChecked.get(i))
+                {
+                    currentPizza.add(toppingsArray.getItem(i));
+                }
+            }
+        }
     }
 
     public void updateSizePrice() {
@@ -132,4 +198,67 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
 
 
     }
+
+    private void handleToppingsList()
+    {
+        toppingsList.clearChoices();
+        resetToppingArray();
+        if(!(currentPizza instanceof BuildYourOwn)) {
+        toppingsArray = new ArrayAdapter<Topping>(this, android.R.layout.simple_list_item_multiple_choice);
+        toppingsArray.addAll(currentPizza.getToppings());
+        toppingsList.setAdapter(toppingsArray);
+            for (int i = 0; i < toppingsArray.getCount(); i++) {
+                toppingsList.setItemChecked(i, true);
+            }
+        }
+        else
+        {
+            toppingsList.setAdapter(toppingsArray);
+        }
+
+
+    }
+
+    private void resetToppingArray()
+    {
+        toppingsArray = new ArrayAdapter<Topping>(this, android.R.layout.simple_list_item_multiple_choice, Topping.values());
+    }
+
+    public void addPizzaToOrder()
+    {
+        updateToppings();
+        ArrayList<Topping> tempToppings = currentPizza.getToppings();
+        Size tempSize = currentPizza.getSize();
+        Crust tempCrust = currentPizza.getCrust();
+        testOrder.add(currentPizza);
+        System.out.print(testOrder.toString());
+
+        if(currentPizza instanceof BuildYourOwn) {
+            currentPizza = chicagoPizza.createBuildYourOwn();
+            currentPizza.setSize(tempSize);
+            currentPizza.setCrust(tempCrust);
+            currentPizza.initializeToppings();
+            for (Topping t : tempToppings) {
+                currentPizza.add(t);
+            }
+        }
+        else if( currentPizza instanceof Meatzza)
+        {
+            currentPizza = chicagoPizza.createMeatzza();
+            currentPizza.setSize(tempSize);
+        }
+        else if( currentPizza instanceof BBQChicken)
+        {
+            currentPizza = chicagoPizza.createBBQChicken();
+            currentPizza.setSize(tempSize);
+        }
+        else if( currentPizza instanceof Deluxe)
+        {
+            currentPizza = chicagoPizza.createDeluxe();
+            currentPizza.setSize(tempSize);
+        }
+    }
+
+
+
 }
