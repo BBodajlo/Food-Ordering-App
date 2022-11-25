@@ -10,4 +10,10 @@
     <string name="chicago">Chicago</string>
     <string name="order">Order</string>
     <string name="stored_order">Stored Order</string>
+    <string name="pizza_type">Pizza Type</string>
+    <string name="crust">Crust</string>
+    <string name="size">Size</string>
+    <string name="small">Small</string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
 </resources>
