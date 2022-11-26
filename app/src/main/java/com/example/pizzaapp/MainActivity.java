@@ -19,4 +19,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+    public void goToOrder(View view)
+    {
+        Intent intent = new Intent(this, OrderActivity.class);
+        startActivity(intent);
+    }
 }

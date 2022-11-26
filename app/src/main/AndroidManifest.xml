@@ -18,6 +18,11 @@
             android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
+            android:name=".OrderActivity"
+            android:label="Order Pizza Activity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -30,6 +35,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
 
     </application>
 
