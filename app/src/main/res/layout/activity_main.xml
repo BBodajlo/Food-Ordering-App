@@ -105,6 +105,7 @@
         android:layout_width="129dp"
         android:layout_height="120dp"
         android:contentDescription="@string/store_order_main_page"
+        android:onClick="goToStoreOrder"
         app:layout_constraintBottom_toBottomOf="@+id/mainPageOrders"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.669"

@@ -231,8 +231,9 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
         Size tempSize = currentPizza.getSize();
         Crust tempCrust = currentPizza.getCrust();
         testOrder.add(currentPizza);
-        OrderActivity.addOrder(currentPizza);
-        System.out.print(testOrder.toString());
+        OrderActivity.getCurrentOrder().add(currentPizza);
+        OrderActivity.updateList();
+        System.out.print(OrderActivity.getCurrentOrder().toString());
 
         if(currentPizza instanceof BuildYourOwn) {
             currentPizza = chicagoPizza.createBuildYourOwn();

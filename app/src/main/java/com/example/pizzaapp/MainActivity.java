@@ -24,4 +24,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, OrderActivity.class);
         startActivity(intent);
     }
+    public void goToStoreOrder(View view)
+    {
+        Intent intent = new Intent(this, StoreOrderActivity.class);
+        startActivity(intent);
+    }
 }
