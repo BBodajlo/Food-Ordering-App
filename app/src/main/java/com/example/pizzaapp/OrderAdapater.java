@@ -64,7 +64,8 @@ class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ItemsHolder>{
     @Override
     public void onBindViewHolder(@NonNull ItemsHolder holder, int position) {
         //assign values for each row
-        holder.tv_name.setText(items.get(position).getItemName().toString());
+        holder.pizzaSelected.setText(items.get(position).getItemName().toString());
+
     }
 
     /**
@@ -80,14 +81,13 @@ class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ItemsHolder>{
      * Get the views from the row layout file, similar to the onCreate() method.
      */
     public static class ItemsHolder extends RecyclerView.ViewHolder {
-        private TextView tv_name, tv_price;
+        private TextView pizzaSelected;
         private Button btn_add;
         private ConstraintLayout parentLayout; //this is the row layout
 
         public ItemsHolder(@NonNull View itemView) {
             super(itemView);
-            tv_name = itemView.findViewById(R.id.tv_flavor);
-            tv_price = itemView.findViewById(R.id.tv_price);
+            pizzaSelected = itemView.findViewById(R.id.tv_flavor);
             btn_add = itemView.findViewById(R.id.btn_add);
             parentLayout = itemView.findViewById(R.id.rowLayout);
             setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
@@ -99,7 +99,7 @@ class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ItemsHolder>{
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(itemView.getContext(), PizzaSelectedActivity.class);
-                    intent.putExtra("ITEM", tv_name.getText());
+                    intent.putExtra("ITEM", pizzaSelected.getText());
                     itemView.getContext().startActivity(intent);
                 }
             });
@@ -114,20 +114,21 @@ class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ItemsHolder>{
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
-                    alert.setTitle("Add to order");
-                    alert.setMessage(tv_name.getText().toString());
+                    alert.setTitle("Remove Pizza");
+                    alert.setMessage("Do you want to remove this pizza?");
                     //handle the "YES" click
-                    alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    alert.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " added.", Toast.LENGTH_LONG).show();
+                            OrderActivity.getCurrentOrder().getPizzaList().remove(getAdapterPosition());
+                            OrderActivity.updateList();
+                            OrderActivity.getOrderAdapater().notifyDataSetChanged();
+                            Toast.makeText(itemView.getContext(),"Pizza Removed", Toast.LENGTH_LONG).show();
                         }
                         //handle the "NO" click
-                    }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " not added.", Toast.LENGTH_LONG).show();
                         }
                     });
                     AlertDialog dialog = alert.create();

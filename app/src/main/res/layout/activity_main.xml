@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2CF3D6"
-    android:backgroundTint="#D7EAF4"
     tools:context=".MainActivity">
 
     <TextView
@@ -49,7 +47,6 @@
         android:layout_marginStart="140dp"
         android:layout_marginTop="16dp"
         android:text="@string/pizza_picker"
-        android:textColor="#131211"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -76,6 +73,7 @@
         android:layout_height="120dp"
         android:layout_marginTop="108dp"
         android:contentDescription="@string/new_york_main_page"
+        android:onClick="goToNY"
         app:layout_constraintBottom_toBottomOf="@+id/mainPageChicago"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.669"

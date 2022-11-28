@@ -20,11 +20,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class ChicagoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener{
-    private Spinner chicagoSpinner;
-    private TextView chicagoCrustText;
-    private TextView chicagoSizeText;
-    private PizzaFactory chicagoPizza = new ChicagoPizza();
+public class NYActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener{
+    private Spinner newyorkSpinner;
+    private TextView newyorkCrustText;
+    private TextView newyorkSizeText;
+    private PizzaFactory newyorkPizza = new NYPizza();
     private Pizza currentPizza;
     private ArrayAdapter<PizzaType> pizzaType;
     private RadioGroup sizeGroup;
@@ -39,19 +39,20 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
     private ImageView pizzaPicture;
     private final static int MAX_TOPPINGS = 7;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chicago);
-        currentPizza = chicagoPizza.createDeluxe();
+        setContentView(R.layout.activity_ny);
+        currentPizza = newyorkPizza.createDeluxe();
         currentPizza.setSize(Size.Small);
-        chicagoSpinner = findViewById(R.id.chicagoSpinner);
+        newyorkSpinner = findViewById(R.id.newyorkSpinner);
         pizzaType = new ArrayAdapter<PizzaType>(this, android.R.layout.simple_spinner_item, PizzaType.values());
         pizzaType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        chicagoSpinner.setAdapter(pizzaType);
-        chicagoSpinner.setOnItemSelectedListener(this);
-        chicagoCrustText = findViewById(R.id.chicagoCrustText);
-        chicagoCrustText.setText(currentPizza.getCrust().toString());
+        newyorkSpinner.setAdapter(pizzaType);
+        newyorkSpinner.setOnItemSelectedListener(this);
+        newyorkCrustText = findViewById(R.id.newyorkCrustText);
+        newyorkCrustText.setText(currentPizza.getCrust().toString());
         sizeGroup = findViewById(R.id.sizeGroup);
         smallSize = findViewById(R.id.smallSize);
         mediumSize = findViewById(R.id.mediumSize);
@@ -65,8 +66,7 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
         toppingsList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         toppingsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 updateToppings();
                 updatePrice();
             }
@@ -96,33 +96,33 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
         Bitmap pic;
         switch (position) {
             case 1:
-                currentPizza = chicagoPizza.createBBQChicken();
-                chicagoCrustText.setText(currentPizza.getCrust().toString());
-                pic = BitmapFactory.decodeResource(getResources(), R.drawable.chickenchicago);
+                currentPizza = newyorkPizza.createBBQChicken();
+                newyorkCrustText.setText(currentPizza.getCrust().toString());
+                pic = BitmapFactory.decodeResource(getResources(), R.drawable.chickenny);
                 pizzaPicture.setImageBitmap(pic);
                 break;
 
             case 0:
 
-                currentPizza = chicagoPizza.createDeluxe();
-                chicagoCrustText.setText(currentPizza.getCrust().toString());
-                pic = BitmapFactory.decodeResource(getResources(), R.drawable.deluxechicago);
+                currentPizza = newyorkPizza.createDeluxe();
+                newyorkCrustText.setText(currentPizza.getCrust().toString());
+                pic = BitmapFactory.decodeResource(getResources(), R.drawable.deluxeny);
                 pizzaPicture.setImageBitmap(pic);
                 break;
 
             case 2:
 
-                currentPizza = chicagoPizza.createMeatzza();
-                chicagoCrustText.setText(currentPizza.getCrust().toString());
-                pic = BitmapFactory.decodeResource(getResources(), R.drawable.meatchicago);
+                currentPizza = newyorkPizza.createMeatzza();
+                newyorkCrustText.setText(currentPizza.getCrust().toString());
+                pic = BitmapFactory.decodeResource(getResources(), R.drawable.meatny);
                 pizzaPicture.setImageBitmap(pic);
                 break;
 
             case 3:
 
-                currentPizza = chicagoPizza.createBuildYourOwn();
-                chicagoCrustText.setText(currentPizza.getCrust().toString());
-                pic = BitmapFactory.decodeResource(getResources(), R.drawable.byochicago);
+                currentPizza = newyorkPizza.createBuildYourOwn();
+                newyorkCrustText.setText(currentPizza.getCrust().toString());
+                pic = BitmapFactory.decodeResource(getResources(), R.drawable.byony);
                 pizzaPicture.setImageBitmap(pic);
                 break;
         }
@@ -229,19 +229,19 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
         toppingsArray = new ArrayAdapter<Topping>(this, android.R.layout.simple_list_item_multiple_choice, Topping.values());
     }
 
-    public void addPizzaToOrder()
-    {
+    public void addPizzaToOrder() {
         updateToppings();
-        if(validNumOfToppings()) {
+        if (validNumOfToppings()) {
             ArrayList<Topping> tempToppings = currentPizza.getToppings();
             Size tempSize = currentPizza.getSize();
             Crust tempCrust = currentPizza.getCrust();
 
             OrderActivity.getCurrentOrder().add(currentPizza);
             OrderActivity.updateList();
+            System.out.print(OrderActivity.getCurrentOrder().toString());
 
             if (currentPizza instanceof BuildYourOwn) {
-                currentPizza = chicagoPizza.createBuildYourOwn();
+                currentPizza = newyorkPizza.createBuildYourOwn();
                 currentPizza.setSize(tempSize);
                 currentPizza.setCrust(tempCrust);
                 currentPizza.initializeToppings();
@@ -249,21 +249,21 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
                     currentPizza.add(t);
                 }
             } else if (currentPizza instanceof Meatzza) {
-                currentPizza = chicagoPizza.createMeatzza();
+                currentPizza = newyorkPizza.createMeatzza();
                 currentPizza.setSize(tempSize);
             } else if (currentPizza instanceof BBQChicken) {
-                currentPizza = chicagoPizza.createBBQChicken();
+                currentPizza = newyorkPizza.createBBQChicken();
                 currentPizza.setSize(tempSize);
             } else if (currentPizza instanceof Deluxe) {
-                currentPizza = chicagoPizza.createDeluxe();
+                currentPizza = newyorkPizza.createDeluxe();
                 currentPizza.setSize(tempSize);
             }
         }
-        else
-        {
+        else{
             Toast.makeText(getApplicationContext(), "Too many toppings!", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private boolean validNumOfToppings()
     {

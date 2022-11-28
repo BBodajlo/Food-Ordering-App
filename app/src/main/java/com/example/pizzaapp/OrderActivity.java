@@ -3,6 +3,7 @@ package com.example.pizzaapp;
 import android.hardware.camera2.params.Capability;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -75,6 +76,7 @@ public class OrderActivity extends AppCompatActivity {
     public static void clearOrder(View view)
     {
         pizzaItems.clear();
+        currentOrder.getPizzaList().clear();
         adapter.notifyDataSetChanged();
 
     }
@@ -83,6 +85,10 @@ public class OrderActivity extends AppCompatActivity {
         StoreOrderActivity.addOrder(currentOrder);
         currentOrder = new Order(StoreOrderActivity.getOrderList().getNextOrderNumber());
         clearOrder(view);
+    }
+    public static OrderAdapter getOrderAdapater()
+    {
+        return adapter;
     }
 
 }

@@ -18,8 +18,9 @@ public class PizzaSelectedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
+        setContentView(R.layout.activity_item_selected);
         Intent intent = getIntent();
+        btn_itemName = findViewById(R.id.btn_itemName);
         btn_itemName.setText(intent.getStringExtra("ITEM"));
     }
 }

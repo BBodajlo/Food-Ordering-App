@@ -16,7 +16,7 @@ public class StoreOrderActivity extends AppCompatActivity {
     public static StoreOrders orderList = new StoreOrders();
     private static ArrayList<OrderItem> orderItems = new ArrayList<>();
     private static StoreOrderAdapter adapter;
-    //private Button clearButton;
+    private Button storeOrderClearButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +26,15 @@ public class StoreOrderActivity extends AppCompatActivity {
         adapter = new StoreOrderAdapter(this, orderItems);
         storeRecycler.setAdapter(adapter);
         storeRecycler.setLayoutManager(new LinearLayoutManager(this));
+        storeOrderClearButton = findViewById(R.id.storeOrderClearButton);
     }
 
+    public void clearOrders(View view)
+    {
+        orderItems.clear();
+        orderList.getOrderList().clear();
+        adapter.notifyDataSetChanged();
+    }
 
     private static void setupOrderItems()
     {
@@ -52,11 +59,16 @@ public class StoreOrderActivity extends AppCompatActivity {
         setupOrderItems();
     }
 
-
+    public static StoreOrderAdapter getStoreAdapter()
+    {
+        return adapter;
+    }
 
     public static StoreOrders getOrderList()
     {
         return orderList;
     }
+
+
 
 }

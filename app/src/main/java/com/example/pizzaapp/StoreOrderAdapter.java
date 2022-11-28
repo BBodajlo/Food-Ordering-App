@@ -114,19 +114,20 @@ class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.ItemsHold
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
-                    alert.setTitle("Add to order");
-                    alert.setMessage(tv_name.getText().toString());
+                    alert.setTitle("Remove Stored order");
+                    alert.setMessage("Would you like to remove this order?");
                     //handle the "YES" click
-                    alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    alert.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " added.", Toast.LENGTH_LONG).show();
+                            StoreOrderActivity.getOrderList().getOrderList().remove(getAdapterPosition());
+                            StoreOrderActivity.updateList();
+                            StoreOrderActivity.getStoreAdapter().notifyDataSetChanged();
+                            Toast.makeText(itemView.getContext(), "Stored Order Removed", Toast.LENGTH_LONG).show();
                         }
                         //handle the "NO" click
                     }).setNegativeButton("no", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " not added.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(itemView.getContext(), "Cancelling", Toast.LENGTH_SHORT).show();
                         }
                     });
                     AlertDialog dialog = alert.create();

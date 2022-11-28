@@ -28,6 +28,16 @@
             android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
+            android:name=".NYActivity"
+            android:label="New york Pizza Activity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PizzaSelectedActivity"
+            android:label="New york Pizza Activity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
