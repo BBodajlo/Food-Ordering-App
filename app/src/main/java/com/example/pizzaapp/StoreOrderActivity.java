@@ -3,6 +3,7 @@ package com.example.pizzaapp;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,9 +32,17 @@ public class StoreOrderActivity extends AppCompatActivity {
 
     public void clearOrders(View view)
     {
-        orderItems.clear();
-        orderList.getOrderList().clear();
-        adapter.notifyDataSetChanged();
+        if(!orderList.getOrderList().isEmpty()) {
+            orderItems.clear();
+            orderList.getOrderList().clear();
+            adapter.notifyDataSetChanged();
+            Toast.makeText(getApplicationContext(), "Stored Orders Cleared!", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Store Orders are Empty!", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private static void setupOrderItems()

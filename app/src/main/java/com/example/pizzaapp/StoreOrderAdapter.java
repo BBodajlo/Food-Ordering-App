@@ -63,7 +63,7 @@ class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.ItemsHold
     @Override
     public void onBindViewHolder(@NonNull ItemsHolder holder, int position) {
         //assign values for each row
-        holder.tv_name.setText(items.get(position).getItemName().toString());
+        holder.pizzaString.setText(items.get(position).getItemName().toString());
     }
 
     /**
@@ -79,15 +79,14 @@ class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.ItemsHold
      * Get the views from the row layout file, similar to the onCreate() method.
      */
     public static class ItemsHolder extends RecyclerView.ViewHolder {
-        private TextView tv_name, tv_price;
-        private Button btn_add;
+        private TextView pizzaString;
+        private Button minusButton;
         private ConstraintLayout parentLayout; //this is the row layout
 
         public ItemsHolder(@NonNull View itemView) {
             super(itemView);
-            tv_name = itemView.findViewById(R.id.tv_flavor);
-            tv_price = itemView.findViewById(R.id.tv_price);
-            btn_add = itemView.findViewById(R.id.btn_add);
+            pizzaString = itemView.findViewById(R.id.pizzaString);
+            minusButton = itemView.findViewById(R.id.minusButton);
             parentLayout = itemView.findViewById(R.id.rowLayout);
             setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
 
@@ -98,7 +97,7 @@ class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.ItemsHold
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(itemView.getContext(), PizzaSelectedActivity.class);
-                    intent.putExtra("ITEM", tv_name.getText());
+                    intent.putExtra("ITEM", pizzaString.getText());
                     itemView.getContext().startActivity(intent);
                 }
             });
@@ -110,7 +109,7 @@ class StoreOrderAdapter extends RecyclerView.Adapter<StoreOrderAdapter.ItemsHold
          * @param itemView
          */
         private void setAddButtonOnClick(@NonNull View itemView) {
-            btn_add.setOnClickListener(new View.OnClickListener() {
+            minusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());

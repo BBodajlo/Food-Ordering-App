@@ -238,7 +238,7 @@ public class NYActivity extends AppCompatActivity implements AdapterView.OnItemS
 
             OrderActivity.getCurrentOrder().add(currentPizza);
             OrderActivity.updateList();
-            System.out.print(OrderActivity.getCurrentOrder().toString());
+            Toast.makeText(getApplicationContext(), "Added to order!", Toast.LENGTH_SHORT).show();
 
             if (currentPizza instanceof BuildYourOwn) {
                 currentPizza = newyorkPizza.createBuildYourOwn();

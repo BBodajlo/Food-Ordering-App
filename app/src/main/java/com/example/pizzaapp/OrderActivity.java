@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -73,18 +74,33 @@ public class OrderActivity extends AppCompatActivity {
         setupPizzaItems();
     }
 
-    public static void clearOrder(View view)
+    public void clearOrder(View view)
     {
-        pizzaItems.clear();
-        currentOrder.getPizzaList().clear();
-        adapter.notifyDataSetChanged();
+        if(!currentOrder.isEmpty()) {
+            pizzaItems.clear();
+            currentOrder.getPizzaList().clear();
+            adapter.notifyDataSetChanged();
+            Toast.makeText(getApplicationContext(), "Order Cleared!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Order is Empty!", Toast.LENGTH_SHORT).show();
+        }
 
     }
-    public static void placeOrder(View view)
+    public void placeOrder(View view)
     {
-        StoreOrderActivity.addOrder(currentOrder);
-        currentOrder = new Order(StoreOrderActivity.getOrderList().getNextOrderNumber());
-        clearOrder(view);
+        if(!currentOrder.isEmpty()) {
+            StoreOrderActivity.addOrder(currentOrder);
+            currentOrder = new Order(StoreOrderActivity.getOrderList().getNextOrderNumber());
+            pizzaItems.clear();
+            currentOrder.getPizzaList().clear();
+            adapter.notifyDataSetChanged();
+            Toast.makeText(getApplicationContext(), "Order placed!", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Order is Empty!", Toast.LENGTH_SHORT).show();
+        }
     }
     public static OrderAdapter getOrderAdapater()
     {

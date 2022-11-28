@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,7 +63,7 @@ class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ItemsHolder>{
     @Override
     public void onBindViewHolder(@NonNull ItemsHolder holder, int position) {
         //assign values for each row
-        holder.pizzaSelected.setText(items.get(position).getItemName().toString());
+        holder.pizzaString.setText(items.get(position).getItemName().toString());
 
     }
 
@@ -81,14 +80,14 @@ class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ItemsHolder>{
      * Get the views from the row layout file, similar to the onCreate() method.
      */
     public static class ItemsHolder extends RecyclerView.ViewHolder {
-        private TextView pizzaSelected;
-        private Button btn_add;
+        private TextView pizzaString;
+        private Button minusButton;
         private ConstraintLayout parentLayout; //this is the row layout
 
         public ItemsHolder(@NonNull View itemView) {
             super(itemView);
-            pizzaSelected = itemView.findViewById(R.id.tv_flavor);
-            btn_add = itemView.findViewById(R.id.btn_add);
+            pizzaString = itemView.findViewById(R.id.pizzaString);
+            minusButton = itemView.findViewById(R.id.minusButton);
             parentLayout = itemView.findViewById(R.id.rowLayout);
             setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
 
@@ -99,7 +98,7 @@ class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ItemsHolder>{
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(itemView.getContext(), PizzaSelectedActivity.class);
-                    intent.putExtra("ITEM", pizzaSelected.getText());
+                    intent.putExtra("ITEM", pizzaString.getText());
                     itemView.getContext().startActivity(intent);
                 }
             });
@@ -111,7 +110,7 @@ class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ItemsHolder>{
          * @param itemView
          */
         private void setAddButtonOnClick(@NonNull View itemView) {
-            btn_add.setOnClickListener(new View.OnClickListener() {
+            minusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 

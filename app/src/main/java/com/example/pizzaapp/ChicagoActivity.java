@@ -239,6 +239,7 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
 
             OrderActivity.getCurrentOrder().add(currentPizza);
             OrderActivity.updateList();
+            Toast.makeText(getApplicationContext(), "Added to order!", Toast.LENGTH_SHORT).show();
 
             if (currentPizza instanceof BuildYourOwn) {
                 currentPizza = chicagoPizza.createBuildYourOwn();
