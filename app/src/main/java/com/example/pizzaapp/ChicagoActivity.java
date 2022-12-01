@@ -97,6 +97,9 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
 
     }
 
+    /**
+     * Update the crust and picture of the activity.
+     */
     public void updateCrustAndPic(View view) {
 
     }
@@ -159,7 +162,7 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
     }
 
     /**
-     * Update the topping list based off the Pizza Type selected.
+     * Update the topping of pizza if it is BuildYouOwn styled.
      */
     public void updateToppings()
     {
@@ -240,8 +243,8 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
     }
 
     /**
-     * Set the size of the pizza based of the selected radio button
-     * and then update the price.
+     * Reset the view of it's previous choices. If the pizza type is BuildYouOwn
+     * then add all toppings to the view and make it selectable.
      */
     private void handleToppingsList()
     {
@@ -262,7 +265,9 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
 
 
     }
-
+    /**
+     * Used by the handleToppingsList method to reset the toppings view.
+     */
     private void resetToppingArray()
     {
         toppingsArray = new ArrayAdapter<Topping>(this, android.R.layout.simple_list_item_multiple_choice, Topping.values());

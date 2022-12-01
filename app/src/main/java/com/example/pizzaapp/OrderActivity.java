@@ -13,7 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Creates the Order activity which stores any pizza that are going to be officially
+ * placed as an order. The activity allows the user to remove pizza individually or clear
+ * the order entirely. A pizza style, toppings, size, and price will be displaced. User can
+ * place the order once it is confirmed.
+ * @author Blake Bodajlo, Stanley Jiang
+ */
 public class OrderActivity extends AppCompatActivity {
 
     public static Order currentOrder = new Order(StoreOrderActivity.getOrderList().getNextOrderNumber());
@@ -22,6 +28,9 @@ public class OrderActivity extends AppCompatActivity {
     private static OrderAdapter adapter;
     private Button clearButton;
 
+    /**
+     * Set the views and functionally of the page.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +54,10 @@ public class OrderActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
-
+    /**
+     * Clear list of pizzas and then add
+     * the current order's pizza to the list.
+     */
     private static void setupPizzaItems()
     {
         pizzaItems.clear();
@@ -59,21 +67,38 @@ public class OrderActivity extends AppCompatActivity {
 
         }
     }
+
+    /**
+     * Add a pizza into the pizza list.
+     */
     public static void addOrder(Pizza pizza){
         currentOrder.add(pizza);
         updateList();
     }
 
-
+    /**
+     * Get the current Order.
+     * @return The current order.
+     */
     public static Order getCurrentOrder()
     {
         return currentOrder;
     }
+
+    /**
+     * Calls the SetupPizzaItems method.
+     */
     public static void updateList()
     {
         setupPizzaItems();
     }
 
+    /**
+     * Invoked when the user clicks the Clear Order button.
+     * Clear the view of the current orders, notifying the user with
+     * a toast once it has been cleared.
+     * @param view The recycler view.
+     */
     public void clearOrder(View view)
     {
         if(!currentOrder.isEmpty()) {
@@ -87,6 +112,12 @@ public class OrderActivity extends AppCompatActivity {
         }
 
     }
+    /**
+     * Invoked when the user clicks on the Place Order button.
+     * Place the order in the view, notifying the user with
+     * a toast once it has been cleared.
+     * @param view The recycler view.
+     */
     public void placeOrder(View view)
     {
         if(!currentOrder.isEmpty()) {
@@ -102,6 +133,10 @@ public class OrderActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Order is Empty!", Toast.LENGTH_SHORT).show();
         }
     }
+    /**
+     * Get the order adapter.
+     * @return the adapter.
+     */
     public static OrderAdapter getOrderAdapater()
     {
         return adapter;

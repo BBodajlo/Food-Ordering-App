@@ -20,6 +20,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+/**
+ * The NYActivity class sets up the graphic interface and features of the New York styled pizza page.
+ * Users are allowed to pick from four styles of pizza types which are "Deluxe", "BBQChicken", "Meatzza", and
+ * "BuildYouOwn". Each type of pizza have selectable sizes ranging from Small, Medium and Large. All topping except
+ * BuildYouOwn is preselected. Prices will be dynamically displayed based off the selected pizza type, size, and toppings.
+ * @author Blake Bodajlo, Stanley Jiang
+ */
 public class NYActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener{
     private Spinner newyorkSpinner;
     private TextView newyorkCrustText;
@@ -40,6 +47,9 @@ public class NYActivity extends AppCompatActivity implements AdapterView.OnItemS
     private final static int MAX_TOPPINGS = 7;
 
 
+    /**
+     * Set the views and functionally of the page.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,11 +96,19 @@ public class NYActivity extends AppCompatActivity implements AdapterView.OnItemS
 
     }
 
-
+    /**
+     * Update the crust and picture of the activity.
+     */
     public void updateCrustAndPic(View view) {
 
     }
 
+    /**
+     * Changes the topping, price, image, and crust based off the pizza type selected
+     * from the spinner.
+     * Each pizza type have their own individual toppings, price, image, and crust. If the
+     * pizza type is BuildYouOwn then make the toppings selectable.
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Bitmap pic;
@@ -142,6 +160,9 @@ public class NYActivity extends AppCompatActivity implements AdapterView.OnItemS
 
     }
 
+    /**
+     * Update the topping of pizza if it is BuildYouOwn styled.
+     */
     public void updateToppings()
     {
 
@@ -159,7 +180,10 @@ public class NYActivity extends AppCompatActivity implements AdapterView.OnItemS
             }
         }
     }
-
+    /**
+     * Set the size of the pizza based of the selected radio button
+     * and then update the price.
+     */
     public void updateSizePrice() {
         if(smallSize.isChecked())
         {
@@ -176,16 +200,26 @@ public class NYActivity extends AppCompatActivity implements AdapterView.OnItemS
         updatePrice();
     }
 
-
+    /**
+     * Update the price of the text area
+     * base off current price of the pizza.
+     */
     private void updatePrice() {
         priceText.setText(String.valueOf(currentPizza.price()));
     }
-
+    /**
+     * Callback method to be invoked if the selection disappears from the view
+     */
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
-
+    /**
+     * Set the size of the pizza based of the selected radio button
+     * and then update the price.
+     * @param radioGroup The grouped radio button of the sizes.
+     * @param size The id of the size selected.
+     */
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int size) {
         switch (size) {
@@ -203,7 +237,10 @@ public class NYActivity extends AppCompatActivity implements AdapterView.OnItemS
 
 
     }
-
+    /**
+     * Reset the view of it's previous choices. If the pizza type is BuildYouOwn
+     * then add all toppings to the view and make it selectable.
+     */
     private void handleToppingsList()
     {
         toppingsList.clearChoices();
@@ -223,12 +260,17 @@ public class NYActivity extends AppCompatActivity implements AdapterView.OnItemS
 
 
     }
-
+    /**
+     * Used by the handleToppingsList method to reset the toppings view.
+     */
     private void resetToppingArray()
     {
         toppingsArray = new ArrayAdapter<Topping>(this, android.R.layout.simple_list_item_multiple_choice, Topping.values());
     }
-
+    /**
+     * Invoked by the "Add to Order" button, which adds the selected pizza
+     * to the Order Activity.
+     */
     public void addPizzaToOrder() {
         updateToppings();
         if (validNumOfToppings()) {
@@ -264,7 +306,12 @@ public class NYActivity extends AppCompatActivity implements AdapterView.OnItemS
         }
     }
 
-
+    /**
+     * Check if the toppings selected in BuildYouOwn pizza is greater than
+     * the amount of topping allowed to be select, which is 7.
+     * @return Returns false if the topping the user selected is
+     * greater than the maximum number allowed, else return true.
+     */
     private boolean validNumOfToppings()
     {
         if(currentPizza.getToppings().size() > MAX_TOPPINGS)
