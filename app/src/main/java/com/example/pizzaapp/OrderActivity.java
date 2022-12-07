@@ -1,9 +1,7 @@
 package com.example.pizzaapp;
 
-import android.hardware.camera2.params.Capability;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -12,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrderActivity extends AppCompatActivity {
 
@@ -106,5 +103,6 @@ public class OrderActivity extends AppCompatActivity {
     {
         return adapter;
     }
+
 
 }
