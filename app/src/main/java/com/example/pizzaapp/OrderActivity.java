@@ -1,9 +1,7 @@
 package com.example.pizzaapp;
 
-import android.hardware.camera2.params.Capability;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -13,13 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-/**
- * Creates the Order activity which stores any pizza that are going to be officially
- * placed as an order. The activity allows the user to remove pizza individually or clear
- * the order entirely. A pizza style, toppings, size, and price will be displaced. User can
- * place the order once it is confirmed.
- * @author Blake Bodajlo, Stanley Jiang
- */
+
 public class OrderActivity extends AppCompatActivity {
 
     public static Order currentOrder = new Order(StoreOrderActivity.getOrderList().getNextOrderNumber());
@@ -141,5 +133,6 @@ public class OrderActivity extends AppCompatActivity {
     {
         return adapter;
     }
+
 
 }
